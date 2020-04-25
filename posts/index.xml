@@ -13,11 +13,20 @@
     
     <item>
       <title>Welcome Back</title>
-      <link>https://cheshire.io/posts/welcome-back/</link>
+      <link>https://cheshire.io/posts/25-04-2020-welcome-back/</link>
       <pubDate>Sat, 25 Apr 2020 17:49:47 +0800</pubDate>
       
-      <guid>https://cheshire.io/posts/welcome-back/</guid>
+      <guid>https://cheshire.io/posts/25-04-2020-welcome-back/</guid>
       <description>More to come soon.</description>
+    </item>
+    
+    <item>
+      <title>Tech 65 Talk</title>
+      <link>https://cheshire.io/posts/06-04-2020-tech65-talks/</link>
+      <pubDate>Mon, 06 Apr 2020 17:49:47 +0800</pubDate>
+      
+      <guid>https://cheshire.io/posts/06-04-2020-tech65-talks/</guid>
+      <description>(Is that a ME from 5 years ago?</description>
     </item>
     
   </channel>
