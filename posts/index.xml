@@ -6,10 +6,19 @@
     <description>Recent content in Posts on Cheshire</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 25 Apr 2020 17:49:47 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 26 Apr 2020 01:04:00 +0800</lastBuildDate>
     
 	<atom:link href="https://cheshire.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>WFH Tools and Tips</title>
+      <link>https://cheshire.io/posts/26-04-2020-wfh-tools/</link>
+      <pubDate>Sun, 26 Apr 2020 01:04:00 +0800</pubDate>
+      
+      <guid>https://cheshire.io/posts/26-04-2020-wfh-tools/</guid>
+      <description>Most people working in the tech industry should be familiar with the concept of working from home, albeit periodically.</description>
+    </item>
     
     <item>
       <title>Welcome Back</title>
