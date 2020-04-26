@@ -24,8 +24,167 @@
       <guid>https://cheshire.io/posts/26-04-2020-wfh-tools/</guid>
       <description>
         
-                Most people working in the tech industry should be familiar with the concept of working from home, albeit periodically.
-        
+
+&lt;p&gt;Most people working in the tech industry should be familiar with the concept of
+working from home, albeit periodically. It is a slightly different when it
+becomes a daily affair without an option for actual face-to-face time with your
+colleagues.&lt;/p&gt;
+
+&lt;p&gt;I suspect that most people will probably walk out of this experience
+reinforcing their beliefs that a 100% remote work environment is the &lt;em&gt;only&lt;/em&gt; way
+of life going forward for them, or hate remote work so much that they will
+never want to work in a 100% remote company.&lt;/p&gt;
+
+&lt;p&gt;Regardless of your current preference towards working from home, here are a
+couple of tools and tips I have collected over the past few weeks that would
+hopefully would make your lives easier.&lt;/p&gt;
+
+&lt;h2 id=&#34;video-calls&#34;&gt;Video Calls&lt;/h2&gt;
+
+&lt;h3 id=&#34;getting-zoom-features-on-hangouts&#34;&gt;Getting Zoom Features on Hangouts&lt;/h3&gt;
+
+&lt;p&gt;Video calls over Zoom / Hangouts / Meet will remain the only way for most
+people to stay connected during this period of time. If you are using Hangouts
+Meet like us at Carousell, there are a couple of browser extensions that you
+can use to recreate the Zoom experience for free.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/wfh-tips/google-grid.jpg&#34; alt=&#34;Hangouts Meet with Grid&#34; /&gt;
+&lt;center&gt;&lt;em&gt;Image: Google Grid View with Hangouts Meet with our Buyer Experience team&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;The Grid View plugin for &lt;a href=&#34;https://chrome.google.com/webstore/detail/google-meet-grid-view/bjkegbgpfgpikgkfidhcihhiflbjgfic&#34; target=&#34;_blank&#34;&gt;Chrome&lt;/a&gt; and &lt;a href=&#34;https://addons.mozilla.org/en-US/firefox/addon/google-meet-grid-view/&#34; target=&#34;_blank&#34;&gt;Firefox&lt;/a&gt; is a great addition to
+help you recreate that grid experience from Zoom. If you want the ability to
+add live reactions and &amp;ldquo;hands-up&amp;rdquo; reactions, &lt;a href=&#34;https://chrome.google.com/webstore/detail/nod-reactions-for-google/oikgofeboedgfkaacpfepbfmgdalabej&#34; target=&#34;_blank&#34;&gt;Nod for Hangouts Meet&lt;/a&gt; can
+help with that.&lt;/p&gt;
+
+&lt;p&gt;The bad news is that everyone needs to install these extensions to benefit from
+them. The good news, however, is that Hangouts Meet will be rolling out its own
+native Grid view in the coming weeks, so at least one of these extensions will
+not be necessary soon. Hopefully Google will continue to ship more new features
+during this period of time and finally catch up with Zoom.&lt;/p&gt;
+
+&lt;h3 id=&#34;audio-quality-and-noise-cancellation&#34;&gt;Audio Quality and Noise Cancellation&lt;/h3&gt;
+
+&lt;p&gt;Perhaps it&amp;rsquo;s due to the influx of online influencers using their &lt;a href=&#34;https://www.bluedesigns.com/products/yeti/&#34; target=&#34;_blank&#34;&gt;Yeti&lt;/a&gt;
+microphones, but I find it difficult to believe that people will follow
+recommendations where they are told to buy expensive microphones to enhance
+their voice over video calls. The reality is that most of us will probably be
+working in environments that are not ideal for video calls at home, especially
+if you are staying with others or have kids running around.&lt;/p&gt;
+
+&lt;p&gt;A high end microphone won&amp;rsquo;t work if you are stressed out by noises around the
+house. In fact, it might even pick up sounds that would normally not be caught
+by the earphones that come with your phone.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/wfh-tips/meetings-calendar.png&#34; alt=&#34;Calendar&#34; /&gt;
+&lt;center&gt;&lt;em&gt;Image: One of them unfortunate days&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;I do about 3-6 hours worth of video calls everyday, and for all of them, I use
+a set of &lt;a href=&#34;https://www.mi.com/sg/headphones_basic2/&#34; target=&#34;_blank&#34;&gt;cheap earphones&lt;/a&gt; that I bought from Xiaomi a couple years back and
+it works super well coupled with Krisp. And trust me - it&amp;rsquo;s much better for
+both the speaker and listeners if you use a earphone or wireless one compared
+to the built-in one in your laptop. Unless you are using the &lt;a href=&#34;https://www.theverge.com/2019/11/21/20974649/apple-macbook-pro-16-inch-laptop-review-keyboard-test-specs-price-features&#34; target=&#34;_blank&#34;&gt;16&amp;rdquo; Macbook Pro&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/wfh-tips/krisp-tool.png&#34; alt=&#34;Krisp Screenshot&#34; /&gt;
+&lt;center&gt;&lt;em&gt;Image: Screenshot of Krisp on macOS&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Fortunately, there is a salvation for us working in environments with random
+noises. &lt;a href=&#34;https://krisp.ai/&#34; target=&#34;_blank&#34;&gt;Krisp&lt;/a&gt; is a software that you can install on your macOS, Windows,
+or iOS devices that will perform noise cancellation for you automatically,
+using AI models that they have built.&lt;/p&gt;
+
+&lt;p&gt;In Singapore, our Air Force frequently does air drills in the air which can
+create quite a bit of background noise. My best record so far has been going
+thru 3 different military aircrafts flying past my house in a single hour, and
+that made me scramble to mute my mic to avoid disrupting others.  Fortunately
+for me, Krisp can block all the loud noises from the plane so I don&amp;rsquo;t have to
+mute myself (in fact, I rarely mute myself unless I need to step away).&lt;/p&gt;
+
+&lt;h2 id=&#34;work-async-but-find-ways-to-connect&#34;&gt;Work Async, But Find Ways to Connect&lt;/h2&gt;
+
+&lt;h3 id=&#34;async-not-sync&#34;&gt;Async, not Sync&lt;/h3&gt;
+
+&lt;p&gt;If you and your team are not used to working remote, it can easily feel
+disconnected from them. I am not definitely &lt;strong&gt;not keen&lt;/strong&gt; on presence-based
+video tools such as &lt;a href=&#34;https://www.pukkateam.com&#34; target=&#34;_blank&#34;&gt;PukkaTeam&lt;/a&gt; and &lt;a href=&#34;https://sneek.io/&#34; target=&#34;_blank&#34;&gt;Sneek&lt;/a&gt;. (Huge) Privacy concerns
+aside, it creates an environment where managers can use to check if their
+team members are at work or not. It could work for well for team members
+without their managers though, if they wish to use it. Slack works well
+enough for us, and I rarely tag someone in my team&amp;rsquo;s channel.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/wfh-tips/doc-list.png&#34; alt=&#34;Document Writing&#34; /&gt;
+&lt;center&gt;&lt;em&gt;Image: Keeping track of my ongoing documents on Notion&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Remote has an excellent &lt;a href=&#34;https://blog.remote.com/why-you-should-be-doing-async-work/&#34; target=&#34;_blank&#34;&gt;article on working asynchronously&lt;/a&gt; that you should
+take a look. Rather than get into video meetings about certain topics,
+well-crafted documents are preferred. It forces you to think through your ideas
+and concepts, and it allows your readers to go through the document and comment
+on their own time. After that, a meeting can be held to go through the document
+and follow-ups.&lt;/p&gt;
+
+&lt;h3 id=&#34;find-ways-to-connect&#34;&gt;Find Ways to Connect&lt;/h3&gt;
+
+&lt;p&gt;Team activities are the best way to stay connected. Some teams at Carousell
+have started sessions where they play games online, agendaless meetings where
+they chat about how life has been since they started working from home.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/wfh-tips/16-personalities.png&#34; alt=&#34;Some of the Personalities&#34; /&gt;
+&lt;center&gt;&lt;em&gt;Image: Some of our finest &amp;ldquo;personalities&amp;rdquo;&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;My team will be doing our first team activity in one week later where we will
+reveal our &lt;a href=&#34;https://www.16personalities.com/&#34; target=&#34;_blank&#34;&gt;16 personalities&lt;/a&gt; in a workshop facilitated by our amazing HR
+Business Partner. The intent of this session is actually less on our individual
+personalities (it&amp;rsquo;s still fun to know), but more about carving out time to talk
+about stuff that is not related to work.&lt;/p&gt;
+
+&lt;h2 id=&#34;wfh-at-your-schedule&#34;&gt;WFH At Your Schedule&lt;/h2&gt;
+
+&lt;h3 id=&#34;adjust-your-schedules&#34;&gt;Adjust Your Schedules&lt;/h3&gt;
+
+&lt;p&gt;Working from home during the COVID-19 period can be challenging if you need to
+take care of family members, especially those who need special care and
+attention.&lt;/p&gt;
+
+&lt;p&gt;If you need changes to your working hours to get by, be sure to speak with your
+team and manager and see what can be done. Our CTO took the lead by announcing
+that he will be working earlier hours in the day so that he can take care of
+his kids in the afternoon while his wife works.&lt;/p&gt;
+
+&lt;p&gt;I personally embrace this period of time by taking &lt;a href=&#34;https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6180010/&#34; target=&#34;_blank&#34;&gt;power naps&lt;/a&gt; when I get
+15-20 minutes blocks of time, especially if it&amp;rsquo;s a particularly challenging day
+with lots of meetings. It&amp;rsquo;s definitely not something I get a chance to do in
+office, and I wake up feeling refreshed and ready for the next meeting.&lt;/p&gt;
+
+&lt;h3 id=&#34;stay-active&#34;&gt;Stay Active&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/wfh-tips/zwift-rides.png&#34; alt=&#34;Zwift Screenshot&#34; /&gt;
+&lt;center&gt;&lt;em&gt;Image: I am definitely not a fast cyclist, but this is good for cardio&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;To avoid sinking into the trap of working non-stop, I set up my bicycle and
+&lt;a href=&#34;https://www.bikeradar.com/reviews/training/indoor-trainers/resistance-trainer/wahoo-kickr-snap-review/&#34; target=&#34;_blank&#34;&gt;indoor trainer&lt;/a&gt; to be literally right beside me so that I can hop on and
+ride anytime on &lt;a href=&#34;https://zwift.com&#34; target=&#34;_blank&#34;&gt;Zwift&lt;/a&gt;. I bought the trainer more than a month ago when I
+saw the situation evolving, and it turns out to be the right choice as I no
+longer need to head out to cycle.&lt;/p&gt;
+
+&lt;p&gt;There are plenty of &lt;a href=&#34;https://www.google.com/search?client=firefox-b-d&amp;amp;q=youtube+hiit+workouts&#34; target=&#34;_blank&#34;&gt;HIIT workouts on Youtube&lt;/a&gt; that you can do without any
+equipment. Do a couple of reps and you can go back to eating those chips and
+snacks you know you stocked up on.&lt;/p&gt;
+
+&lt;h2 id=&#34;other-notable-mentions&#34;&gt;Other Notable Mentions&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;I bought &lt;a href=&#34;https://magnet.crowdcafe.com/&#34; target=&#34;_blank&#34;&gt;magnet&lt;/a&gt; in the past when it was on sale, but now that it no longer works on Catalina, I have switched to &lt;a href=&#34;https://rectangleapp.com/&#34; target=&#34;_blank&#34;&gt;Rectangle&lt;/a&gt;, which is almost the same and open source!&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://notion.so&#34; target=&#34;_blank&#34;&gt;Notion&lt;/a&gt; is my current GOTO tool for tracking TODOs and writing documents. Works better than other personal TODO tools in my opinion&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://pinafore.social/&#34; target=&#34;_blank&#34;&gt;Pinafore&lt;/a&gt;, if you use Mastodon for tooting.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;that-s-all-i-have-for-now&#34;&gt;That&amp;rsquo;s all I have for now&lt;/h2&gt;
+
+&lt;p&gt;I hope you found something helpful in this post. For me, the biggest lifesaver
+has been Krisp - and I only came across it in a &lt;a href=&#34;http://blog.ifost.org.au/2020/03/how-i-teach-classes-remotely.html&#34; target=&#34;_blank&#34;&gt;blog post by a teacher&lt;/a&gt; on
+teaching remotely online.&lt;/p&gt;
+
+&lt;p&gt;If you have tips you wish to share with me, &lt;a href=&#34;https://twitter.com/victorneo&#34; target=&#34;_blank&#34;&gt;let me know on Twitter&lt;/a&gt;!&lt;/p&gt;
+
       </description>
     </item>
     
@@ -40,9 +199,8 @@
       
       <guid>https://cheshire.io/posts/25-04-2020-welcome-back/</guid>
       <description>
-        
-                More to come soon.
-        
+        &lt;p&gt;More to come soon.&lt;/p&gt;
+
       </description>
     </item>
     
@@ -74,9 +232,27 @@
       
       <guid>https://cheshire.io/about/</guid>
       <description>
-        
-                Hello. I am Victor, and I am based in sunny Singapore.
-        
+        &lt;p&gt;Hello. I am Victor, and I am based in sunny
+&lt;a href=&#34;https://goo.gl/maps/1dW9WEpN43n7wRQi9&#34; target=&#34;_blank&#34;&gt;Singapore&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I head up the Engineering team at &lt;a href=&#34;https://careers.carousell.com&#34; target=&#34;_blank&#34;&gt;Carousell&lt;/a&gt;,
+and spend a bit of my time reading through studies and books on management, and
+primarily use this blog to share my thoughts on them.&lt;/p&gt;
+
+&lt;p&gt;If you are looking for book recommendations on Management or Engineering
+Management, you can check out my &lt;a href=&#34;https://www.goodreads.com/review/list/23479859-victor-neo?shelf=management&amp;amp;sort=rating&#34; target=&#34;_blank&#34;&gt;GoodReads list&lt;/a&gt;
+to see what are the top books that I have read and would highly recommend. 5
+stars are reserved for books that I highly recommend.&lt;/p&gt;
+
+&lt;p&gt;Mysteries and thrillers books are my favourite, so I do have a list to track
+those that I have read as well.
+- &lt;a href=&#34;https://www.goodreads.com/review/list/23479859-victor-neo?shelf=mysteries&#34; target=&#34;_blank&#34;&gt;Mysteries /
+  Thrillers&lt;/a&gt;
+- Favourite book so far: &lt;a href=&#34;https://www.goodreads.com/book/show/34945597-the-great-passage&#34; target=&#34;_blank&#34;&gt;The Great Passage&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Questions or comments? You can reach out to me on
+&lt;a href=&#34;https://twitter.com/victorneo&#34; target=&#34;_blank&#34;&gt;Twitter&lt;/a&gt;.&lt;/p&gt;
+
       </description>
     </item>
     
