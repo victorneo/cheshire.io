@@ -6,6 +6,7 @@
     <description>Recent content on Cheshire</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <copyright>© 2020 Victor Neo. Licensed under CC BY-NC International License.</copyright>
     <lastBuildDate>Sun, 26 Apr 2020 01:04:00 +0800</lastBuildDate>
     
 	<atom:link href="https://cheshire.io/index.xml" rel="self" type="application/rss+xml" />
@@ -74,7 +75,7 @@
       <guid>https://cheshire.io/about/</guid>
       <description>
         
-                Hi, I am Victor, based in Singapore.
+                Hello. I am Victor, and I am based in sunny Singapore.
         
       </description>
     </item>
