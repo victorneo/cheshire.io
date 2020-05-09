@@ -31,6 +31,15 @@
     </item>
     
     <item>
+      <title>ActivityPub: Part 1</title>
+      <link>https://cheshire.io/posts/10-05-2020-actpub-part-1/</link>
+      <pubDate>Fri, 10 Apr 2020 01:01:00 +0800</pubDate>
+      
+      <guid>https://cheshire.io/posts/10-05-2020-actpub-part-1/</guid>
+      <description>Let&amp;rsquo;s Federate on ActivityPub ActivityPub is a protocol for decentralized social networks to that allows federation - imagine servers running their own instances of &amp;ldquo;Twitter&amp;rdquo; that can speak with each other, across domains.</description>
+    </item>
+    
+    <item>
       <title>Tech 65 Talk</title>
       <link>https://cheshire.io/posts/06-04-2020-tech65-talks/</link>
       <pubDate>Mon, 06 Apr 2020 17:49:47 +0800</pubDate>
