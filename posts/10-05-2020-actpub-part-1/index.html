@@ -5,9 +5,9 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"><title>ActivityPub: Part 1 - Cheshire</title><meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta itemprop="name" content="ActivityPub: Part 1">
 <meta itemprop="description" content="Federating with ActivityPub: Part 1">
-<meta itemprop="datePublished" content="2020-04-10T01:01:00&#43;08:00" />
-<meta itemprop="dateModified" content="2020-04-10T01:01:00&#43;08:00" />
-<meta itemprop="wordCount" content="630">
+<meta itemprop="datePublished" content="2020-05-10T01:01:00&#43;08:00" />
+<meta itemprop="dateModified" content="2020-05-10T01:01:00&#43;08:00" />
+<meta itemprop="wordCount" content="906">
 
 
 
@@ -15,8 +15,8 @@
 <meta property="og:description" content="Federating with ActivityPub: Part 1" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://cheshire.io/posts/10-05-2020-actpub-part-1/" />
-<meta property="article:published_time" content="2020-04-10T01:01:00+08:00" />
-<meta property="article:modified_time" content="2020-04-10T01:01:00+08:00" />
+<meta property="article:published_time" content="2020-05-10T01:01:00+08:00" />
+<meta property="article:modified_time" content="2020-05-10T01:01:00+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ActivityPub: Part 1"/>
 <meta name="twitter:description" content="Federating with ActivityPub: Part 1"/>
@@ -70,7 +70,7 @@
 					<div class="meta">
 						<div class="date">
 							<span class="day">10</span>
-							<span class="rest">Apr 2020</span>
+							<span class="rest">May 2020</span>
 						</div>
 					</div>
 				
@@ -89,7 +89,8 @@ federation - imagine servers running their own instances of &ldquo;Twitter&rdquo
 speak with each other, across domains.</p>
 
 <p>The screenshot below shows a toots and its replies on <a href="https://joinmastodon.org/" target="_blank">Mastodon</a>, a
-Twitter-like social network that supports ActivityPub:</p>
+Twitter-like social network that supports ActivityPub with users across
+different servers:</p>
 
 <p><img src="/images/actpub/toot-example.png" alt="Toot from Mastodon" />
 <center><em><a href="https://mastodon.social/web/statuses/104126966908663803" target="_blank">Example of a toot from Mastodon</a></em></center></p>
@@ -99,7 +100,8 @@ problems: posting updates, following / unfollowing users.</p>
 
 <p>In this series of blog posts, I will be documenting my journey in building a
 simple server that federates with ActivityPub servers. It will be a fun journey
-to figure out how other implementations work.</p>
+to figure out how other implementations work and learn about the fun / pain
+when operating a federated application.</p>
 
 <p>If you are interested in learning more, it might be easier (and faster) to
 check out existing implementations (next section) or check out
@@ -113,13 +115,15 @@ of which are not ActivityPub compatible (eg. the once wildly popular
 
 <p>The most popular ActivityPub federated network would be <a href="https://joinmastodon.org/" target="_blank">Mastodon</a>, which
 became popular when ActivityPub received the W3C Recommendation status. You
-will have to choose which instances of Mastodon to join though.</p>
+will have to choose which instances of Mastodon to join though. I am
+<a href="https://mastodon.social/@victorneo" target="_blank">@victorneo@mastodon.social</a> if you want to follow me - my toots are
+automatically posted to my Twitter as well.</p>
 
 <p><img src="/images/actpub/mastodon-instances.png" alt="Toot from Mastodon" />
-<center><em><a href="https://mastodon.social/web/statuses/104126966908663803" target="_blank">Some Mastodon Instances you can join</a></em></center></p>
+<center><em>Some Mastodon Instances you can join</em></center></p>
 
-<p>Some others include <a href="https://pleroma.social/" target="_blank">Pleroma</a>, a blogging platform, <a href="https://write.as/" target="_blank">write.as</a> and
-<a href="https://join.misskey.page/en/" target="_blank">MissKey</a> which is very popular with Japanese users.</p>
+<p>Some others include <a href="https://pleroma.social/" target="_blank">Pleroma</a>, <a href="https://write.as/" target="_blank">write.as</a>, and <a href="https://join.misskey.page/en/" target="_blank">MissKey</a> which is very
+popular with Japanese users.</p>
 
 <h2 id="implementation">Implementation</h2>
 
@@ -133,8 +137,17 @@ continue to be for a while, but fortunately a <a href="https://socialhub.activit
 For testing purposes at the moment, we will attempt to federate with Mastodon
 and its ActivityPub implementation.</p>
 
-<p>You can follow my progress on this repository: <a href="https://github.com/Soda-Hub/soda" target="_blank">Soda</a>. There&rsquo;s currently
+<p><img src="/images/actpub/testsuite-status.png" alt="Testsuite" />
+<center><em>Yikes, not a good sign with the official test suite is down. Fortunately, a <a href="https://socialhub.activitypub.rocks/t/introducing-fedidb-devtools-for-activitypub/660" target="_blank">new one</a> is in the works.</em></center></p>
+
+<p>You can follow my progress on this repository: <a href="https://github.com/Soda-Hub/soda" target="_blank">soda-hub/Soda</a>. There&rsquo;s currently
 only one or two working API endpoints for testing out how Following APIs work.</p>
+
+<p>For the Python folks reading this, I am using <a href="https://www.starlette.io/" target="_blank">Starlette</a> to build the
+application to also take this chance to play with a ASGI framework using
+asyncio on Python 3. It&rsquo;s been refreshing so far to be able to use asyncio
+with a Flask-inspired API for building web applications, and with the nice
+<a href="https://www.techempower.com/benchmarks/#section=data-r17&amp;hw=ph&amp;test=fortune&amp;l=zijzen-1" target="_blank">performance benefits</a> that comes with it.</p>
 
 <h2 id="let-s-begin-let-s-follow-someone">Let&rsquo;s Begin: Let&rsquo;s Follow Someone</h2>
 
@@ -142,13 +155,13 @@ only one or two working API endpoints for testing out how Following APIs work.</
 overview of how Federation works for ActivityPub:</p>
 
 <p><img src="/images/actpub/actpub-overview.png" alt="ActivityPub Overview" />
-<center><em><a href="https://mastodon.social/web/statuses/104126966908663803" target="_blank">High-level Overview of ActivityPub</a></em></center></p>
+<center><em>High-level Overview of ActivityPub</em></center></p>
 
 <p>Most interactions between servers that Federate would be over the <code>/inbox</code>
 endpoint - except for the initial user discovery. Here is a quick sequence of
 interactions when I search for a user on a remote server to follow on Mastodon:</p>
 
-<ul>
+<ol>
 <li>Server A sends a <a href="https://docs.joinmastodon.org/spec/webfinger/" target="_blank">webfinger</a> request to the remote server (Server B) to
 identify the user</li>
 <li>Server B replies with the user&rsquo;s information</li>
@@ -156,10 +169,20 @@ identify the user</li>
 <li>Server A sends a follow request to Server B when a user clicks Follow to the
 user&rsquo;s <code>/inbox</code> address</li>
 <li>Server B replies with an Follow object to indicate that following is approved</li>
-</ul>
+</ol>
 
-<p><img src="/images/actpub/mastodon-follow.png" alt="Mastodon User Search" />
-<center><em><a href="https://mastodon.social/web/statuses/104126966908663803" target="_blank">Mastodon User Search UI</a></em></center></p>
+<p><img src="/images/actpub/mastodon-search.png" alt="Mastodon User Search" />
+<center><em>Mastodon User Search UI</em></center></p>
+
+<p>In terms of HTTP endpoints involved in the same flow:</p>
+
+<ol>
+<li>Server A: <code>HTTP GET https://serverb.com/.well-known/webfinger?resource=acct:username@serverb.com</code></li>
+<li>Server A: <code>HTTP GET https://serverb.com/(some url)/username</code> with the header <code>Accept: application/activity+json</code></li>
+<li>Server B replies with the user&rsquo;s information</li>
+<li>Server A shows the user&rsquo;s information, and thumbnail</li>
+<li>Server A sends a follow request to Server B: <code>HTTP POST https://serverb.com/(some url)/username/inbox</code></li>
+</ol>
 
 <p>The webfinger request returns the following response from Mastodon when I query
 for my own account:</p>
@@ -192,33 +215,7 @@ of the <code>application/activity+json</code> type.</p>
 
 <p>Querying the endpoint (with HTTP header <code>Accept: application/activity+json</code>),
 you will get the following response:</p>
-<pre><code>{  &#34;@context&#34;:[&#34;https://www.w3.org/ns/activitystreams&#34;,
-    &#34;https://w3id.org/security/v1&#34;,
-    { &#34;manuallyApprovesFollowers&#34;:&#34;as:manuallyApprovesFollowers&#34;,
-      &#34;toot&#34;:&#34;http://joinmastodon.org/ns#&#34;,
-      &#34;featured&#34;:{
-        &#34;@id&#34;:&#34;toot:featured&#34;,
-        &#34;@type&#34;:&#34;@id&#34;
-      },
-      &#34;alsoKnownAs&#34;:{
-        &#34;@id&#34;:&#34;as:alsoKnownAs&#34;,
-        &#34;@type&#34;:&#34;@id&#34;
-      },
-      &#34;movedTo&#34;:{
-        &#34;@id&#34;:&#34;as:movedTo&#34;,
-        &#34;@type&#34;:&#34;@id&#34;
-      },
-      &#34;schema&#34;:&#34;http://schema.org#&#34;,
-      &#34;PropertyValue&#34;:&#34;schema:PropertyValue&#34;,
-      &#34;value&#34;:&#34;schema:value&#34;,
-      &#34;IdentityProof&#34;:&#34;toot:IdentityProof&#34;,
-      &#34;discoverable&#34;:&#34;toot:discoverable&#34;,
-      &#34;focalPoint&#34;:{
-        &#34;@container&#34;:&#34;@list&#34;,
-        &#34;@id&#34;:&#34;toot:focalPoint&#34;
-      }
-    }
-  ],
+<pre><code>{  &#34;@context&#34;:[&#34;https://www.w3.org/ns/activitystreams&#34;, ,,,],
   &#34;id&#34;:&#34;https://mastodon.social/users/victorneo&#34;,
   &#34;type&#34;:&#34;Person&#34;,
   &#34;following&#34;:&#34;https://mastodon.social/users/victorneo/following&#34;,
@@ -252,7 +249,25 @@ you will get the following response:</p>
 <p>Parsing the response, another server can send a <a href="https://flak.tedunangst.com/post/AP-networking" target="_blank">Follow request</a> to
 <code>https://mastodon.social/users/victorneo/inbox</code> to be processed.</p>
 
-<p>More to come in part 2!</p>
+<h2 id="key-format">Key Format</h2>
+
+<p>There&rsquo;s no &ldquo;official&rdquo; format when it comes down specifying the public key
+encoding format that should be used when generated (see <a href="https://github.com/w3c/activitypub/issues/315" target="_blank">this issue</a>).</p>
+
+<p>Mastodon&rsquo;s <a href="https://blog.joinmastodon.org/2018/06/how-to-implement-a-basic-activitypub-server/" target="_blank">mini-tutorial</a> on setting up a compatible ActivityPub
+implementation indicates that they use a 2048 bits key using OpenSSL in the
+terminal&hellip; which I assume that they use a library internally for.</p>
+
+<p>As I am using Python for building my app, I will be using
+<a href="https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/" target="_blank">pyca/cryptography</a> to help me with key generation for my application. You
+can view the <a href="https://github.com/Soda-Hub/soda/blob/master/models/crypto_utils.py#L22" target="_blank">key generation code</a> here, but definitely do not use it
+without reading the documentation on what it does as (i) I am not a security
+expert, and (ii) this is not production grade security configuration.</p>
+
+<h2 id="next-up">Next Up</h2>
+
+<p>In the next series, we will continue with the Follow interactions, and get a
+proper <code>/inbox</code> endpoint up and going.</p>
 
 			</div>
 

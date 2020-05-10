@@ -7,10 +7,213 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© 2020 Victor Neo. Licensed under CC BY-NC International License.</copyright>
-    <lastBuildDate>Sun, 26 Apr 2020 01:04:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 10 May 2020 01:01:00 +0800</lastBuildDate>
     
 	<atom:link href="https://cheshire.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ActivityPub: Part 1</title>
+      <link>
+              
+                      https://cheshire.io/posts/10-05-2020-actpub-part-1/
+              
+      </link>
+      <pubDate>Sun, 10 May 2020 01:01:00 +0800</pubDate>
+      
+      <guid>https://cheshire.io/posts/10-05-2020-actpub-part-1/</guid>
+      <description>
+        
+
+&lt;h2 id=&#34;let-s-federate-on-activitypub&#34;&gt;Let&amp;rsquo;s Federate on ActivityPub&lt;/h2&gt;
+
+&lt;p&gt;ActivityPub is a &lt;a href=&#34;https://www.w3.org/TR/activitypub/&#34; target=&#34;_blank&#34;&gt;protocol for decentralized social networks&lt;/a&gt; to that allows
+federation - imagine servers running their own instances of &amp;ldquo;Twitter&amp;rdquo; that can
+speak with each other, across domains.&lt;/p&gt;
+
+&lt;p&gt;The screenshot below shows a toots and its replies on &lt;a href=&#34;https://joinmastodon.org/&#34; target=&#34;_blank&#34;&gt;Mastodon&lt;/a&gt;, a
+Twitter-like social network that supports ActivityPub with users across
+different servers:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/actpub/toot-example.png&#34; alt=&#34;Toot from Mastodon&#34; /&gt;
+&lt;center&gt;&lt;em&gt;&lt;a href=&#34;https://mastodon.social/web/statuses/104126966908663803&#34; target=&#34;_blank&#34;&gt;Example of a toot from Mastodon&lt;/a&gt;&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Supporting users across federated platforms introduces some interesting
+problems: posting updates, following / unfollowing users.&lt;/p&gt;
+
+&lt;p&gt;In this series of blog posts, I will be documenting my journey in building a
+simple server that federates with ActivityPub servers. It will be a fun journey
+to figure out how other implementations work and learn about the fun / pain
+when operating a federated application.&lt;/p&gt;
+
+&lt;p&gt;If you are interested in learning more, it might be easier (and faster) to
+check out existing implementations (next section) or check out
+&lt;a href=&#34;https://activitypub.rocks/&#34; target=&#34;_blank&#34;&gt;activitypub.rocks&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;existing-implementations&#34;&gt;Existing Implementations&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://fediverse.party/&#34; target=&#34;_blank&#34;&gt;Fediverse.party&lt;/a&gt; documents a list of decentralized social platforms, some
+of which are not ActivityPub compatible (eg. the once wildly popular
+&lt;a href=&#34;https://diasporafoundation.org/&#34; target=&#34;_blank&#34;&gt;Disapora&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;The most popular ActivityPub federated network would be &lt;a href=&#34;https://joinmastodon.org/&#34; target=&#34;_blank&#34;&gt;Mastodon&lt;/a&gt;, which
+became popular when ActivityPub received the W3C Recommendation status. You
+will have to choose which instances of Mastodon to join though. I am
+&lt;a href=&#34;https://mastodon.social/@victorneo&#34; target=&#34;_blank&#34;&gt;@victorneo@mastodon.social&lt;/a&gt; if you want to follow me - my toots are
+automatically posted to my Twitter as well.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/actpub/mastodon-instances.png&#34; alt=&#34;Toot from Mastodon&#34; /&gt;
+&lt;center&gt;&lt;em&gt;Some Mastodon Instances you can join&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Some others include &lt;a href=&#34;https://pleroma.social/&#34; target=&#34;_blank&#34;&gt;Pleroma&lt;/a&gt;, &lt;a href=&#34;https://write.as/&#34; target=&#34;_blank&#34;&gt;write.as&lt;/a&gt;, and &lt;a href=&#34;https://join.misskey.page/en/&#34; target=&#34;_blank&#34;&gt;MissKey&lt;/a&gt; which is very
+popular with Japanese users.&lt;/p&gt;
+
+&lt;h2 id=&#34;implementation&#34;&gt;Implementation&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://socialhub.activitypub.rocks/t/guide-for-new-activitypub-implementers/479&#34; target=&#34;_blank&#34;&gt;Guide for new ActivityPub implementators&lt;/a&gt; is the best place to start
+right and what I will follow, and where you should start if you are ever
+implementing your own. &lt;a href=&#34;https://flak.tedunangst.com/post/ActivityPub-as-it-has-been-understood&#34; target=&#34;_blank&#34;&gt;ActivityPub as it has been understood&lt;/a&gt; is another
+good reference with some good references.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately, the official test suite has been &lt;a href=&#34;https://socialhub.activitypub.rocks/t/the-activitypub-test-suite/290&#34; target=&#34;_blank&#34;&gt;down for a while&lt;/a&gt; and will
+continue to be for a while, but fortunately a &lt;a href=&#34;https://socialhub.activitypub.rocks/t/introducing-fedidb-devtools-for-activitypub/660&#34; target=&#34;_blank&#34;&gt;new one is in the works&lt;/a&gt;.
+For testing purposes at the moment, we will attempt to federate with Mastodon
+and its ActivityPub implementation.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/actpub/testsuite-status.png&#34; alt=&#34;Testsuite&#34; /&gt;
+&lt;center&gt;&lt;em&gt;Yikes, not a good sign with the official test suite is down. Fortunately, a &lt;a href=&#34;https://socialhub.activitypub.rocks/t/introducing-fedidb-devtools-for-activitypub/660&#34; target=&#34;_blank&#34;&gt;new one&lt;/a&gt; is in the works.&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;You can follow my progress on this repository: &lt;a href=&#34;https://github.com/Soda-Hub/soda&#34; target=&#34;_blank&#34;&gt;soda-hub/Soda&lt;/a&gt;. There&amp;rsquo;s currently
+only one or two working API endpoints for testing out how Following APIs work.&lt;/p&gt;
+
+&lt;p&gt;For the Python folks reading this, I am using &lt;a href=&#34;https://www.starlette.io/&#34; target=&#34;_blank&#34;&gt;Starlette&lt;/a&gt; to build the
+application to also take this chance to play with a ASGI framework using
+asyncio on Python 3. It&amp;rsquo;s been refreshing so far to be able to use asyncio
+with a Flask-inspired API for building web applications, and with the nice
+&lt;a href=&#34;https://www.techempower.com/benchmarks/#section=data-r17&amp;amp;hw=ph&amp;amp;test=fortune&amp;amp;l=zijzen-1&#34; target=&#34;_blank&#34;&gt;performance benefits&lt;/a&gt; that comes with it.&lt;/p&gt;
+
+&lt;h2 id=&#34;let-s-begin-let-s-follow-someone&#34;&gt;Let&amp;rsquo;s Begin: Let&amp;rsquo;s Follow Someone&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://activitypub.rocks/&#34; target=&#34;_blank&#34;&gt;official website&lt;/a&gt; has a reference image for a really high-level
+overview of how Federation works for ActivityPub:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/actpub/actpub-overview.png&#34; alt=&#34;ActivityPub Overview&#34; /&gt;
+&lt;center&gt;&lt;em&gt;High-level Overview of ActivityPub&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Most interactions between servers that Federate would be over the &lt;code&gt;/inbox&lt;/code&gt;
+endpoint - except for the initial user discovery. Here is a quick sequence of
+interactions when I search for a user on a remote server to follow on Mastodon:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Server A sends a &lt;a href=&#34;https://docs.joinmastodon.org/spec/webfinger/&#34; target=&#34;_blank&#34;&gt;webfinger&lt;/a&gt; request to the remote server (Server B) to
+identify the user&lt;/li&gt;
+&lt;li&gt;Server B replies with the user&amp;rsquo;s information&lt;/li&gt;
+&lt;li&gt;Server A shows the user&amp;rsquo;s information, and thumbnail&lt;/li&gt;
+&lt;li&gt;Server A sends a follow request to Server B when a user clicks Follow to the
+user&amp;rsquo;s &lt;code&gt;/inbox&lt;/code&gt; address&lt;/li&gt;
+&lt;li&gt;Server B replies with an Follow object to indicate that following is approved&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/actpub/mastodon-search.png&#34; alt=&#34;Mastodon User Search&#34; /&gt;
+&lt;center&gt;&lt;em&gt;Mastodon User Search UI&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;In terms of HTTP endpoints involved in the same flow:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Server A: &lt;code&gt;HTTP GET https://serverb.com/.well-known/webfinger?resource=acct:username@serverb.com&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Server A: &lt;code&gt;HTTP GET https://serverb.com/(some url)/username&lt;/code&gt; with the header &lt;code&gt;Accept: application/activity+json&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Server B replies with the user&amp;rsquo;s information&lt;/li&gt;
+&lt;li&gt;Server A shows the user&amp;rsquo;s information, and thumbnail&lt;/li&gt;
+&lt;li&gt;Server A sends a follow request to Server B: &lt;code&gt;HTTP POST https://serverb.com/(some url)/username/inbox&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The webfinger request returns the following response from Mastodon when I query
+for my own account:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &amp;#34;subject&amp;#34;:&amp;#34;acct:victorneo@mastodon.social&amp;#34;,
+  &amp;#34;aliases&amp;#34;:[
+    &amp;#34;https://mastodon.social/@victorneo&amp;#34;,
+    &amp;#34;https://mastodon.social/users/victorneo&amp;#34;
+  ],
+  &amp;#34;links&amp;#34;:[
+    {
+      &amp;#34;rel&amp;#34;:&amp;#34;http://webfinger.net/rel/profile-page&amp;#34;,
+      &amp;#34;type&amp;#34;:&amp;#34;text/html&amp;#34;,
+      &amp;#34;href&amp;#34;:&amp;#34;https://mastodon.social/@victorneo&amp;#34;
+    },
+    {
+      &amp;#34;rel&amp;#34;:&amp;#34;self&amp;#34;,
+      &amp;#34;type&amp;#34;:&amp;#34;application/activity+json&amp;#34;,
+      &amp;#34;href&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo&amp;#34;
+    },
+    {
+      &amp;#34;rel&amp;#34;:&amp;#34;http://ostatus.org/schema/1.0/subscribe&amp;#34;,
+      &amp;#34;template&amp;#34;:&amp;#34;https://mastodon.social/authorize_interaction?uri={uri}&amp;#34;
+    }
+  ]
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;After getting this response, any server would know that they can access my
+profile information by looking for the link that points to &lt;code&gt;self&lt;/code&gt; and
+of the &lt;code&gt;application/activity+json&lt;/code&gt; type.&lt;/p&gt;
+
+&lt;p&gt;Querying the endpoint (with HTTP header &lt;code&gt;Accept: application/activity+json&lt;/code&gt;),
+you will get the following response:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{  &amp;#34;@context&amp;#34;:[&amp;#34;https://www.w3.org/ns/activitystreams&amp;#34;, ,,,],
+  &amp;#34;id&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo&amp;#34;,
+  &amp;#34;type&amp;#34;:&amp;#34;Person&amp;#34;,
+  &amp;#34;following&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo/following&amp;#34;,
+  &amp;#34;followers&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo/followers&amp;#34;,
+  &amp;#34;inbox&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo/inbox&amp;#34;,
+  &amp;#34;outbox&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo/outbox&amp;#34;,
+  &amp;#34;featured&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo/collections/featured&amp;#34;,
+  &amp;#34;preferredUsername&amp;#34;:&amp;#34;victorneo&amp;#34;,
+  &amp;#34;name&amp;#34;:&amp;#34;Victor Neo&amp;#34;,
+  &amp;#34;summary&amp;#34;:&amp;#34;\u003cp\u003eEngineering at Carousell. Passionate about the Open 🕸️.\u003c/p\u003e&amp;#34;,
+  &amp;#34;url&amp;#34;:&amp;#34;https://mastodon.social/@victorneo&amp;#34;,
+  &amp;#34;manuallyApprovesFollowers&amp;#34;:false,
+  &amp;#34;discoverable&amp;#34;:true,
+  &amp;#34;publicKey&amp;#34;:{
+    &amp;#34;id&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo#main-key&amp;#34;,
+    &amp;#34;owner&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo&amp;#34;,
+    &amp;#34;publicKeyPem&amp;#34;:&amp;#34;-----BEGIN PUBLIC KEY-----\...\n-----END PUBLIC KEY-----\n&amp;#34;
+  },
+  &amp;#34;tag&amp;#34;:[],
+  &amp;#34;attachment&amp;#34;:[],
+  &amp;#34;endpoints&amp;#34;:{
+    &amp;#34;sharedInbox&amp;#34;:&amp;#34;https://mastodon.social/inbox&amp;#34;
+  },
+  &amp;#34;icon&amp;#34;:{
+    &amp;#34;type&amp;#34;:&amp;#34;Image&amp;#34;,
+    &amp;#34;mediaType&amp;#34;:&amp;#34;image/jpeg&amp;#34;,
+    &amp;#34;url&amp;#34;:&amp;#34;https://files.mastodon.social/accounts/avatars/000/077/572/original/a79a3b7bf7011af0.jpg&amp;#34;
+
+  }
+}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Parsing the response, another server can send a &lt;a href=&#34;https://flak.tedunangst.com/post/AP-networking&#34; target=&#34;_blank&#34;&gt;Follow request&lt;/a&gt; to
+&lt;code&gt;https://mastodon.social/users/victorneo/inbox&lt;/code&gt; to be processed.&lt;/p&gt;
+
+&lt;h2 id=&#34;key-format&#34;&gt;Key Format&lt;/h2&gt;
+
+&lt;p&gt;There&amp;rsquo;s no &amp;ldquo;official&amp;rdquo; format when it comes down specifying the public key
+encoding format that should be used when generated (see &lt;a href=&#34;https://github.com/w3c/activitypub/issues/315&#34; target=&#34;_blank&#34;&gt;this issue&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Mastodon&amp;rsquo;s &lt;a href=&#34;https://blog.joinmastodon.org/2018/06/how-to-implement-a-basic-activitypub-server/&#34; target=&#34;_blank&#34;&gt;mini-tutorial&lt;/a&gt; on setting up a compatible ActivityPub
+implementation indicates that they use a 2048 bits key using OpenSSL in the
+terminal&amp;hellip; which I assume that they use a library internally for.&lt;/p&gt;
+
+&lt;p&gt;As I am using Python for building my app, I will be using
+&lt;a href=&#34;https://cryptography.io/en/latest/hazmat/primitives/asymmetric/rsa/&#34; target=&#34;_blank&#34;&gt;pyca/cryptography&lt;/a&gt; to help me with key generation for my application. You
+can view the &lt;a href=&#34;https://github.com/Soda-Hub/soda/blob/master/models/crypto_utils.py#L22&#34; target=&#34;_blank&#34;&gt;key generation code&lt;/a&gt; here, but definitely do not use it
+without reading the documentation on what it does as (i) I am not a security
+expert, and (ii) this is not production grade security configuration.&lt;/p&gt;
+
+&lt;h2 id=&#34;next-up&#34;&gt;Next Up&lt;/h2&gt;
+
+&lt;p&gt;In the next series, we will continue with the Follow interactions, and get a
+proper &lt;code&gt;/inbox&lt;/code&gt; endpoint up and going.&lt;/p&gt;
+
+      </description>
+    </item>
     
     <item>
       <title>WFH Tools and Tips</title>
@@ -200,194 +403,6 @@ teaching remotely online.&lt;/p&gt;
       <guid>https://cheshire.io/posts/25-04-2020-welcome-back/</guid>
       <description>
         &lt;p&gt;More to come soon.&lt;/p&gt;
-
-      </description>
-    </item>
-    
-    <item>
-      <title>ActivityPub: Part 1</title>
-      <link>
-              
-                      https://cheshire.io/posts/10-05-2020-actpub-part-1/
-              
-      </link>
-      <pubDate>Fri, 10 Apr 2020 01:01:00 +0800</pubDate>
-      
-      <guid>https://cheshire.io/posts/10-05-2020-actpub-part-1/</guid>
-      <description>
-        
-
-&lt;h2 id=&#34;let-s-federate-on-activitypub&#34;&gt;Let&amp;rsquo;s Federate on ActivityPub&lt;/h2&gt;
-
-&lt;p&gt;ActivityPub is a &lt;a href=&#34;https://www.w3.org/TR/activitypub/&#34; target=&#34;_blank&#34;&gt;protocol for decentralized social networks&lt;/a&gt; to that allows
-federation - imagine servers running their own instances of &amp;ldquo;Twitter&amp;rdquo; that can
-speak with each other, across domains.&lt;/p&gt;
-
-&lt;p&gt;The screenshot below shows a toots and its replies on &lt;a href=&#34;https://joinmastodon.org/&#34; target=&#34;_blank&#34;&gt;Mastodon&lt;/a&gt;, a
-Twitter-like social network that supports ActivityPub:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/actpub/toot-example.png&#34; alt=&#34;Toot from Mastodon&#34; /&gt;
-&lt;center&gt;&lt;em&gt;&lt;a href=&#34;https://mastodon.social/web/statuses/104126966908663803&#34; target=&#34;_blank&#34;&gt;Example of a toot from Mastodon&lt;/a&gt;&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;Supporting users across federated platforms introduces some interesting
-problems: posting updates, following / unfollowing users.&lt;/p&gt;
-
-&lt;p&gt;In this series of blog posts, I will be documenting my journey in building a
-simple server that federates with ActivityPub servers. It will be a fun journey
-to figure out how other implementations work.&lt;/p&gt;
-
-&lt;p&gt;If you are interested in learning more, it might be easier (and faster) to
-check out existing implementations (next section) or check out
-&lt;a href=&#34;https://activitypub.rocks/&#34; target=&#34;_blank&#34;&gt;activitypub.rocks&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;existing-implementations&#34;&gt;Existing Implementations&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://fediverse.party/&#34; target=&#34;_blank&#34;&gt;Fediverse.party&lt;/a&gt; documents a list of decentralized social platforms, some
-of which are not ActivityPub compatible (eg. the once wildly popular
-&lt;a href=&#34;https://diasporafoundation.org/&#34; target=&#34;_blank&#34;&gt;Disapora&lt;/a&gt;).&lt;/p&gt;
-
-&lt;p&gt;The most popular ActivityPub federated network would be &lt;a href=&#34;https://joinmastodon.org/&#34; target=&#34;_blank&#34;&gt;Mastodon&lt;/a&gt;, which
-became popular when ActivityPub received the W3C Recommendation status. You
-will have to choose which instances of Mastodon to join though.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/actpub/mastodon-instances.png&#34; alt=&#34;Toot from Mastodon&#34; /&gt;
-&lt;center&gt;&lt;em&gt;&lt;a href=&#34;https://mastodon.social/web/statuses/104126966908663803&#34; target=&#34;_blank&#34;&gt;Some Mastodon Instances you can join&lt;/a&gt;&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;Some others include &lt;a href=&#34;https://pleroma.social/&#34; target=&#34;_blank&#34;&gt;Pleroma&lt;/a&gt;, a blogging platform, &lt;a href=&#34;https://write.as/&#34; target=&#34;_blank&#34;&gt;write.as&lt;/a&gt; and
-&lt;a href=&#34;https://join.misskey.page/en/&#34; target=&#34;_blank&#34;&gt;MissKey&lt;/a&gt; which is very popular with Japanese users.&lt;/p&gt;
-
-&lt;h2 id=&#34;implementation&#34;&gt;Implementation&lt;/h2&gt;
-
-&lt;p&gt;The &lt;a href=&#34;https://socialhub.activitypub.rocks/t/guide-for-new-activitypub-implementers/479&#34; target=&#34;_blank&#34;&gt;Guide for new ActivityPub implementators&lt;/a&gt; is the best place to start
-right and what I will follow, and where you should start if you are ever
-implementing your own. &lt;a href=&#34;https://flak.tedunangst.com/post/ActivityPub-as-it-has-been-understood&#34; target=&#34;_blank&#34;&gt;ActivityPub as it has been understood&lt;/a&gt; is another
-good reference with some good references.&lt;/p&gt;
-
-&lt;p&gt;Unfortunately, the official test suite has been &lt;a href=&#34;https://socialhub.activitypub.rocks/t/the-activitypub-test-suite/290&#34; target=&#34;_blank&#34;&gt;down for a while&lt;/a&gt; and will
-continue to be for a while, but fortunately a &lt;a href=&#34;https://socialhub.activitypub.rocks/t/introducing-fedidb-devtools-for-activitypub/660&#34; target=&#34;_blank&#34;&gt;new one is in the works&lt;/a&gt;.
-For testing purposes at the moment, we will attempt to federate with Mastodon
-and its ActivityPub implementation.&lt;/p&gt;
-
-&lt;p&gt;You can follow my progress on this repository: &lt;a href=&#34;https://github.com/Soda-Hub/soda&#34; target=&#34;_blank&#34;&gt;Soda&lt;/a&gt;. There&amp;rsquo;s currently
-only one or two working API endpoints for testing out how Following APIs work.&lt;/p&gt;
-
-&lt;h2 id=&#34;let-s-begin-let-s-follow-someone&#34;&gt;Let&amp;rsquo;s Begin: Let&amp;rsquo;s Follow Someone&lt;/h2&gt;
-
-&lt;p&gt;The &lt;a href=&#34;https://activitypub.rocks/&#34; target=&#34;_blank&#34;&gt;official website&lt;/a&gt; has a reference image for a really high-level
-overview of how Federation works for ActivityPub:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/actpub/actpub-overview.png&#34; alt=&#34;ActivityPub Overview&#34; /&gt;
-&lt;center&gt;&lt;em&gt;&lt;a href=&#34;https://mastodon.social/web/statuses/104126966908663803&#34; target=&#34;_blank&#34;&gt;High-level Overview of ActivityPub&lt;/a&gt;&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;Most interactions between servers that Federate would be over the &lt;code&gt;/inbox&lt;/code&gt;
-endpoint - except for the initial user discovery. Here is a quick sequence of
-interactions when I search for a user on a remote server to follow on Mastodon:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Server A sends a &lt;a href=&#34;https://docs.joinmastodon.org/spec/webfinger/&#34; target=&#34;_blank&#34;&gt;webfinger&lt;/a&gt; request to the remote server (Server B) to
-identify the user&lt;/li&gt;
-&lt;li&gt;Server B replies with the user&amp;rsquo;s information&lt;/li&gt;
-&lt;li&gt;Server A shows the user&amp;rsquo;s information, and thumbnail&lt;/li&gt;
-&lt;li&gt;Server A sends a follow request to Server B when a user clicks Follow to the
-user&amp;rsquo;s &lt;code&gt;/inbox&lt;/code&gt; address&lt;/li&gt;
-&lt;li&gt;Server B replies with an Follow object to indicate that following is approved&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/actpub/mastodon-follow.png&#34; alt=&#34;Mastodon User Search&#34; /&gt;
-&lt;center&gt;&lt;em&gt;&lt;a href=&#34;https://mastodon.social/web/statuses/104126966908663803&#34; target=&#34;_blank&#34;&gt;Mastodon User Search UI&lt;/a&gt;&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
-
-&lt;p&gt;The webfinger request returns the following response from Mastodon when I query
-for my own account:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{
-  &amp;#34;subject&amp;#34;:&amp;#34;acct:victorneo@mastodon.social&amp;#34;,
-  &amp;#34;aliases&amp;#34;:[
-    &amp;#34;https://mastodon.social/@victorneo&amp;#34;,
-    &amp;#34;https://mastodon.social/users/victorneo&amp;#34;
-  ],
-  &amp;#34;links&amp;#34;:[
-    {
-      &amp;#34;rel&amp;#34;:&amp;#34;http://webfinger.net/rel/profile-page&amp;#34;,
-      &amp;#34;type&amp;#34;:&amp;#34;text/html&amp;#34;,
-      &amp;#34;href&amp;#34;:&amp;#34;https://mastodon.social/@victorneo&amp;#34;
-    },
-    {
-      &amp;#34;rel&amp;#34;:&amp;#34;self&amp;#34;,
-      &amp;#34;type&amp;#34;:&amp;#34;application/activity+json&amp;#34;,
-      &amp;#34;href&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo&amp;#34;
-    },
-    {
-      &amp;#34;rel&amp;#34;:&amp;#34;http://ostatus.org/schema/1.0/subscribe&amp;#34;,
-      &amp;#34;template&amp;#34;:&amp;#34;https://mastodon.social/authorize_interaction?uri={uri}&amp;#34;
-    }
-  ]
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;After getting this response, any server would know that they can access my
-profile information by looking for the link that points to &lt;code&gt;self&lt;/code&gt; and
-of the &lt;code&gt;application/activity+json&lt;/code&gt; type.&lt;/p&gt;
-
-&lt;p&gt;Querying the endpoint (with HTTP header &lt;code&gt;Accept: application/activity+json&lt;/code&gt;),
-you will get the following response:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;{  &amp;#34;@context&amp;#34;:[&amp;#34;https://www.w3.org/ns/activitystreams&amp;#34;,
-    &amp;#34;https://w3id.org/security/v1&amp;#34;,
-    { &amp;#34;manuallyApprovesFollowers&amp;#34;:&amp;#34;as:manuallyApprovesFollowers&amp;#34;,
-      &amp;#34;toot&amp;#34;:&amp;#34;http://joinmastodon.org/ns#&amp;#34;,
-      &amp;#34;featured&amp;#34;:{
-        &amp;#34;@id&amp;#34;:&amp;#34;toot:featured&amp;#34;,
-        &amp;#34;@type&amp;#34;:&amp;#34;@id&amp;#34;
-      },
-      &amp;#34;alsoKnownAs&amp;#34;:{
-        &amp;#34;@id&amp;#34;:&amp;#34;as:alsoKnownAs&amp;#34;,
-        &amp;#34;@type&amp;#34;:&amp;#34;@id&amp;#34;
-      },
-      &amp;#34;movedTo&amp;#34;:{
-        &amp;#34;@id&amp;#34;:&amp;#34;as:movedTo&amp;#34;,
-        &amp;#34;@type&amp;#34;:&amp;#34;@id&amp;#34;
-      },
-      &amp;#34;schema&amp;#34;:&amp;#34;http://schema.org#&amp;#34;,
-      &amp;#34;PropertyValue&amp;#34;:&amp;#34;schema:PropertyValue&amp;#34;,
-      &amp;#34;value&amp;#34;:&amp;#34;schema:value&amp;#34;,
-      &amp;#34;IdentityProof&amp;#34;:&amp;#34;toot:IdentityProof&amp;#34;,
-      &amp;#34;discoverable&amp;#34;:&amp;#34;toot:discoverable&amp;#34;,
-      &amp;#34;focalPoint&amp;#34;:{
-        &amp;#34;@container&amp;#34;:&amp;#34;@list&amp;#34;,
-        &amp;#34;@id&amp;#34;:&amp;#34;toot:focalPoint&amp;#34;
-      }
-    }
-  ],
-  &amp;#34;id&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo&amp;#34;,
-  &amp;#34;type&amp;#34;:&amp;#34;Person&amp;#34;,
-  &amp;#34;following&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo/following&amp;#34;,
-  &amp;#34;followers&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo/followers&amp;#34;,
-  &amp;#34;inbox&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo/inbox&amp;#34;,
-  &amp;#34;outbox&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo/outbox&amp;#34;,
-  &amp;#34;featured&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo/collections/featured&amp;#34;,
-  &amp;#34;preferredUsername&amp;#34;:&amp;#34;victorneo&amp;#34;,
-  &amp;#34;name&amp;#34;:&amp;#34;Victor Neo&amp;#34;,
-  &amp;#34;summary&amp;#34;:&amp;#34;\u003cp\u003eEngineering at Carousell. Passionate about the Open 🕸️.\u003c/p\u003e&amp;#34;,
-  &amp;#34;url&amp;#34;:&amp;#34;https://mastodon.social/@victorneo&amp;#34;,
-  &amp;#34;manuallyApprovesFollowers&amp;#34;:false,
-  &amp;#34;discoverable&amp;#34;:true,
-  &amp;#34;publicKey&amp;#34;:{
-    &amp;#34;id&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo#main-key&amp;#34;,
-    &amp;#34;owner&amp;#34;:&amp;#34;https://mastodon.social/users/victorneo&amp;#34;,
-    &amp;#34;publicKeyPem&amp;#34;:&amp;#34;-----BEGIN PUBLIC KEY-----\...\n-----END PUBLIC KEY-----\n&amp;#34;
-  },
-  &amp;#34;tag&amp;#34;:[],
-  &amp;#34;attachment&amp;#34;:[],
-  &amp;#34;endpoints&amp;#34;:{
-    &amp;#34;sharedInbox&amp;#34;:&amp;#34;https://mastodon.social/inbox&amp;#34;
-  },
-  &amp;#34;icon&amp;#34;:{
-    &amp;#34;type&amp;#34;:&amp;#34;Image&amp;#34;,
-    &amp;#34;mediaType&amp;#34;:&amp;#34;image/jpeg&amp;#34;,
-    &amp;#34;url&amp;#34;:&amp;#34;https://files.mastodon.social/accounts/avatars/000/077/572/original/a79a3b7bf7011af0.jpg&amp;#34;
-
-  }
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Parsing the response, another server can send a &lt;a href=&#34;https://flak.tedunangst.com/post/AP-networking&#34; target=&#34;_blank&#34;&gt;Follow request&lt;/a&gt; to
-&lt;code&gt;https://mastodon.social/users/victorneo/inbox&lt;/code&gt; to be processed.&lt;/p&gt;
-
-&lt;p&gt;More to come in part 2!&lt;/p&gt;
 
       </description>
     </item>
