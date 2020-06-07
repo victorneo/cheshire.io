@@ -27,7 +27,7 @@
 
 &lt;h2 id=&#34;asgi-wsgi-and-python&#34;&gt;ASGI, WSGI, and Python&lt;/h2&gt;
 
-&lt;p&gt;Most popular Python web frameworks, such as Django and Flask, works wth WSGI
+&lt;p&gt;Most popular Python web frameworks, such as Django and Flask, works with WSGI
 (Web Server Gateway Interface) under the hood, which has been around since
 &lt;a href=&#34;https://www.python.org/dev/peps/pep-0333/&#34; target=&#34;_blank&#34;&gt;PEP 333&lt;/a&gt; in 2003, and its update &lt;a href=&#34;https://www.python.org/dev/peps/pep-3333/&#34; target=&#34;_blank&#34;&gt;PEP 3333&lt;/a&gt; in 2010.&lt;/p&gt;
 
@@ -39,7 +39,7 @@ Interface).&lt;/p&gt;
 
 &lt;p&gt;Major web frameworks are currently working to go async, including &lt;a href=&#34;https://docs.djangoproject.com/en/dev/releases/3.1/&#34; target=&#34;_blank&#34;&gt;Django&lt;/a&gt;,
 which is a major effort itself given the size of the framework. &lt;a href=&#34;https://flask.palletsprojects.com/en/1.1.x/&#34; target=&#34;_blank&#34;&gt;Flask&lt;/a&gt;,
-which uses &lt;a href=&#34;https://github.com/pallets/werkzeug/issues/1322#issuecomment-601062396&#34; target=&#34;_blank&#34;&gt;Werkzeug&lt;/a&gt; interally, does not have ASGI support yet.&lt;/p&gt;
+which uses &lt;a href=&#34;https://github.com/pallets/werkzeug/issues/1322#issuecomment-601062396&#34; target=&#34;_blank&#34;&gt;Werkzeug&lt;/a&gt; internally, does not have ASGI support yet.&lt;/p&gt;
 
 &lt;p&gt;If you are building a new Python-based web project today, the new of ASGI web
 frameworks should be on your list for consideration; they &amp;ldquo;generally&amp;rdquo; perform
@@ -54,7 +54,7 @@ much better than their WSGI-only counterparts&lt;/em&gt;&lt;/center&gt;&lt;/p&gt
 &lt;h2 id=&#34;try-an-asgi-supported-web-framework-today&#34;&gt;Try an ASGI-Supported Web Framework Today&lt;/h2&gt;
 
 &lt;p&gt;&lt;strong&gt;If you are looking for a Django-like experience&lt;/strong&gt; for a full web framework,
-&lt;a href=&#34;https://fastapi.tiangolo.com/&#34; target=&#34;_blank&#34;&gt;FastAPI&lt;/a&gt; would offer the closest experience. There&amp;rsquo;s full support for
+&lt;a href=&#34;https://fastapi.tiangolo.com/&#34; target=&#34;_blank&#34;&gt;FastAPI&lt;/a&gt; would offer the closest experience. There is full support for
 &lt;a href=&#34;https://fastapi.tiangolo.com/features/#just-modern-python&#34; target=&#34;_blank&#34;&gt;Pydantic&lt;/a&gt;, which makes the experience more pure Python than to learn a new
 framework-specific API.&lt;/p&gt;
 
@@ -94,7 +94,7 @@ point for your own frameworks.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/asgi/starlette.png&#34; alt=&#34;Starlette Logo&#34; /&gt;
 &lt;center&gt;&lt;em&gt;&lt;a href=&#34;https://pgjones.gitlab.io/quart/tutorials/quickstart.html&#34; target=&#34;_blank&#34;&gt;Starlette, an ASGI Framework / Toolkit&lt;/a&gt;&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
 
-&lt;p&gt;If you try any of the frameworks above, I wil be happy to hear more about your
+&lt;p&gt;If you try any of the frameworks above, I will be happy to hear more about your
 explorations with them on &lt;a href=&#34;https://twitter.com/victorneo&#34; target=&#34;_blank&#34;&gt;Twitter&lt;/a&gt;.&lt;/p&gt;
 
       </description>
