@@ -7,10 +7,98 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© 2020 Victor Neo. Licensed under CC BY-NC International License.</copyright>
-    <lastBuildDate>Sun, 10 May 2020 01:01:00 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2020 01:01:00 +0800</lastBuildDate>
     
 	<atom:link href="https://cheshire.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ASGI Frameworks for Python Are Here</title>
+      <link>
+              
+                      https://cheshire.io/posts/06-06-2020-asgi-frameworks/
+              
+      </link>
+      <pubDate>Sun, 07 Jun 2020 01:01:00 +0800</pubDate>
+      
+      <guid>https://cheshire.io/posts/06-06-2020-asgi-frameworks/</guid>
+      <description>
+        
+
+&lt;h2 id=&#34;asgi-wsgi-and-python&#34;&gt;ASGI, WSGI, and Python&lt;/h2&gt;
+
+&lt;p&gt;Most popular Python web frameworks, such as Django and Flask, works wth WSGI
+(Web Server Gateway Interface) under the hood, which has been around since
+&lt;a href=&#34;https://www.python.org/dev/peps/pep-0333/&#34; target=&#34;_blank&#34;&gt;PEP 333&lt;/a&gt; in 2003, and its update &lt;a href=&#34;https://www.python.org/dev/peps/pep-3333/&#34; target=&#34;_blank&#34;&gt;PEP 3333&lt;/a&gt; in 2010.&lt;/p&gt;
+
+&lt;p&gt;With the introduction of asyncio in Python 3 and &lt;code&gt;await&lt;/code&gt; syntax in Python 3.5,
+the Python community finally has an easy way to do asynchronous programming. It
+was only a matter of time before steam would pick up for asynchronous support
+for web frameworks in the form of &lt;a href=&#34;https://asgi.readthedocs.io/en/latest/specs/main.html&#34; target=&#34;_blank&#34;&gt;ASGI&lt;/a&gt; (Asynchronous Server Gateway
+Interface).&lt;/p&gt;
+
+&lt;p&gt;Major web frameworks are currently working to go async, including &lt;a href=&#34;https://docs.djangoproject.com/en/dev/releases/3.1/&#34; target=&#34;_blank&#34;&gt;Django&lt;/a&gt;,
+which is a major effort itself given the size of the framework. &lt;a href=&#34;https://flask.palletsprojects.com/en/1.1.x/&#34; target=&#34;_blank&#34;&gt;Flask&lt;/a&gt;,
+which uses &lt;a href=&#34;https://github.com/pallets/werkzeug/issues/1322#issuecomment-601062396&#34; target=&#34;_blank&#34;&gt;Werkzeug&lt;/a&gt; interally, does not have ASGI support yet.&lt;/p&gt;
+
+&lt;p&gt;If you are building a new Python-based web project today, the new of ASGI web
+frameworks should be on your list for consideration; they &amp;ldquo;generally&amp;rdquo; perform
+faster than their WSGI-only counterparts for the same workload, and while
+&lt;a href=&#34;https://www.techempower.com/benchmarks/#section=data-r19&amp;amp;hw=cl&amp;amp;test=composite&amp;amp;l=zijzen-1r&#34; target=&#34;_blank&#34;&gt;benchmarks&lt;/a&gt; are helpful, it is still best to benchmark it against your own
+use cases.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/asgi/benchmarks.png&#34; alt=&#34;TechEmpower Benchmarks Round 19&#34; /&gt;
+&lt;center&gt;&lt;em&gt;&lt;a href=&#34;https://www.techempower.com/benchmarks/#section=data-r19&amp;amp;hw=cl&amp;amp;test=composite&amp;amp;l=zijzen-1r&#34; target=&#34;_blank&#34;&gt;TechEmpower Benchmarks Round 19&lt;/a&gt;: &lt;br /&gt;ASGI-based web frameworks perform
+much better than their WSGI-only counterparts&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;try-an-asgi-supported-web-framework-today&#34;&gt;Try an ASGI-Supported Web Framework Today&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;If you are looking for a Django-like experience&lt;/strong&gt; for a full web framework,
+&lt;a href=&#34;https://fastapi.tiangolo.com/&#34; target=&#34;_blank&#34;&gt;FastAPI&lt;/a&gt; would offer the closest experience. There&amp;rsquo;s full support for
+&lt;a href=&#34;https://fastapi.tiangolo.com/features/#just-modern-python&#34; target=&#34;_blank&#34;&gt;Pydantic&lt;/a&gt;, which makes the experience more pure Python than to learn a new
+framework-specific API.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/asgi/fastapi.png&#34; alt=&#34;FastAPI Logo&#34; /&gt;
+&lt;center&gt;&lt;em&gt;&lt;a href=&#34;https://fastapi.tiangolo.com/&#34; target=&#34;_blank&#34;&gt;FastAPI&lt;/a&gt; is your best choice for a full web framework&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;If you are looking for a Flask-like experience&lt;/strong&gt; for a micro-web framework,
+you will be spoiled for options.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://pgjones.gitlab.io/quart/index.html&#34; target=&#34;_blank&#34;&gt;Quart&lt;/a&gt; offers full-API compatibility with Flask, and should be the
+first place where you start&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://vibora.io/&#34; target=&#34;_blank&#34;&gt;Vibora&lt;/a&gt; has an API inspired by Flask with an obsession for speed&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://sanic.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34;&gt;Sanic&lt;/a&gt; is also inspired by Flask but has different design decisions from
+Vibora&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;from quart import Quart
+
+app = Quart(__name__)
+
+@app.route(&amp;#39;/&amp;#39;)
+async def hello():
+return &amp;#39;hello&amp;#39;
+
+app.run()&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;center&gt;&lt;em&gt;Quart&amp;rsquo;s &lt;a href=&#34;https://pgjones.gitlab.io/quart/tutorials/quickstart.html&#34; target=&#34;_blank&#34;&gt;Hello World Example&lt;/a&gt;&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;If you are looking for an ASGI framework/toolkit&lt;/strong&gt;, &lt;a href=&#34;https://www.starlette.io/&#34; target=&#34;_blank&#34;&gt;Starlette&lt;/a&gt; will be the
+one to go for. It is lower level than the ones listed above as it is ultimately
+a toolkit, but you might find it useful for developing your own frameworks.
+&lt;a href=&#34;https://github.com/victorneo/starlette-starter&#34; target=&#34;_blank&#34;&gt;Starlette-Starter&lt;/a&gt; is a boilerplate that I have built for my own API
+projects, which might be helpful for you if you are looking for a starting
+point for your own frameworks.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;https://cheshire.io/images/asgi/starlette.png&#34; alt=&#34;Starlette Logo&#34; /&gt;
+&lt;center&gt;&lt;em&gt;&lt;a href=&#34;https://pgjones.gitlab.io/quart/tutorials/quickstart.html&#34; target=&#34;_blank&#34;&gt;Starlette, an ASGI Framework / Toolkit&lt;/a&gt;&lt;/em&gt;&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;If you try any of the frameworks above, I wil be happy to hear more about your
+explorations with them on &lt;a href=&#34;https://twitter.com/victorneo&#34; target=&#34;_blank&#34;&gt;Twitter&lt;/a&gt;.&lt;/p&gt;
+
+      </description>
+    </item>
     
     <item>
       <title>ActivityPub: Part 1</title>
